@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kritarth Panwar</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --card: #1c2128;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,17,23,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.9rem 2rem;
+    }
+    .nav-brand { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: var(--muted); font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+    .hero {
+      max-width: 960px; margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      display: flex; gap: 2.5rem; align-items: center;
+      flex-wrap: wrap;
+    }
+    .hero-avatar {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; font-weight: 700; color: #fff; flex-shrink: 0;
+      box-shadow: 0 0 30px rgba(88,166,255,0.3);
+      object-fit: cover;
+    }
+    .hero-text h1 { font-size: 2.2rem; font-weight: 800; }
+    .hero-text .role {
+      font-size: 1.05rem; color: var(--accent); margin: 0.3rem 0 0.8rem;
+    }
+    .hero-text p { color: var(--muted); max-width: 540px; }
+    .hero-links { display: flex; gap: 0.8rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.9rem;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    }
+    .btn:hover { border-color: var(--accent); background: var(--card); text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #0d1117; border-color: var(--accent); font-weight: 600; }
+    .btn-primary:hover { background: #79b8ff; border-color: #79b8ff; }
+    section { max-width: 960px; margin: 0 auto; padding: 3.5rem 2rem; }
+    section + section { border-top: 1px solid var(--border); }
+    h2 {
+      font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    h2 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); }
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: var(--border); border-radius: 2px;
+    }
+    .timeline-item { position: relative; margin-bottom: 2rem; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -1.58rem; top: 0.4rem;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+    }
+    .timeline-item h3 { font-size: 1rem; font-weight: 600; }
+    .timeline-item .meta {
+      font-size: 0.85rem; color: var(--muted); margin: 0.15rem 0 0.5rem;
+    }
+    .timeline-item p { font-size: 0.9rem; color: var(--muted); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-size: 0.75rem; padding: 0.2rem 0.55rem; border-radius: 20px;
+      background: rgba(88,166,255,0.1); color: var(--accent); border: 1px solid rgba(88,166,255,0.2);
+    }
+    .interest-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .interest-block h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+    .interest-block p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.8rem;
+    }
+    .photo-grid img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .awards-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .awards-list li {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.75rem 1rem;
+      font-size: 0.9rem; display: flex; align-items: center; gap: 0.6rem;
+    }
+    .awards-list li::before { content: '🏆'; font-size: 1rem; }
+    footer {
+      text-align: center; padding: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.85rem;
+    }
+    @media (max-width: 600px) {
+      .hero { flex-direction: column; gap: 1.5rem; padding: 3rem 1.2rem 2.5rem; }
+      section { padding: 2.5rem 1.2rem; }
+      .photo-grid img { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <span class="nav-brand">Kritarth Panwar</span>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#interests">Interests</a>
+    <a href="#awards">Awards</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-avatar">KP</div>
+  <div class="hero-text">
+    <h1>Kritarth Panwar</h1>
+    <div class="role">Computing Science Student · Simon Fraser University</div>
+    <p>
+      I enjoy building practical software, learning through hands-on projects, and staying active through sports,
+      fitness, and campus activities. I'm especially interested in technology, collaboration, and experiences that
+      push me to grow both technically and personally.
+    </p>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="mailto:kpanwar.work@gmail.com">✉ Contact Me</a>
+      <a class="btn" href="https://www.linkedin.com/in/kritarth-panwar-203b65327/" target="_blank">LinkedIn</a>
+      <a class="btn" href="https://github.com/" target="_blank">GitHub</a>
+    </div>
+  </div>
+</div>
+
+<section id="experience">
+  <h2><span class="dot"></span>Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <h3>Peer Educator — Fraser International College</h3>
+      <div class="meta">Burnaby, BC, Canada</div>
+      <p>
+        Assisted peers in subjects I had previously excelled in and helped host pre-exam support sessions
+        and mid-semester check-in events to build a stronger academic community.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Innovate in Code — Maru-a-Pula School</h3>
+      <div class="meta">Gaborone, Botswana</div>
+      <p>
+        Helped code and publish useful school resources, including a classroom booking website and a daily
+        check-in system for boarding students.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>For All — Maru-a-Pula School</h3>
+      <div class="meta">Climate Awareness & Community Events</div>
+      <p>
+        Spread awareness about climate change and environmental preservation by organizing events and
+        collaborating with Green Botswana.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Amnesty International — Maru-a-Pula School</h3>
+      <div class="meta">Events & Fundraising</div>
+      <p>
+        Took part in hosting events and fundraisers in support of Stepping Stones Botswana, combining advocacy
+        with practical event organization.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Happy Homes — Maru-a-Pula School</h3>
+      <div class="meta">Tutoring & Mentorship</div>
+      <p>
+        Tutored underprivileged children to help them improve academically and gain confidence in their studies.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Master of Ceremonies — Community Events</h3>
+      <div class="meta">Volunteer Experience</div>
+      <p>
+        Served as master of ceremonies for the RITES Afrika 50th Anniversary celebration and the HSS Botswana
+        Youth Camp conclusion ceremonies.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Football Tournament Organizer — Maru-a-Pula School</h3>
+      <div class="meta">Volunteer Fundraising Event</div>
+      <p>
+        Hosted and managed a 5-a-side football tournament during family fun day to raise funds for Green Botswana.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2><span class="dot"></span>Projects</h2>
+  <div class="projects-grid">
+    <div class="card">
+      <h3>🎬 Movie Recommendation Engine</h3>
+      <p>Uses machine learning to understand people's tastes and recommend movies accordingly.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">ML</span></div>
+    </div>
+    <div class="card">
+      <h3>📋 All-Integrated Assignments Web App</h3>
+      <p>Helps students consolidate and track assignments across multiple platforms in one place.</p>
+      <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+    </div>
+    <div class="card">
+      <h3>📦 Inventory Management System</h3>
+      <p>Helps students organize and track personal items when switching dorms or moving out.</p>
+      <div class="tags"><span class="tag">Python</span></div>
+    </div>
+    <div class="card">
+      <h3>🥁 Air Drum Simulator</h3>
+      <p>Webcam-based real-time drum simulator where finger taps trigger different drum sounds.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">MediaPipe</span><span class="tag">Computer Vision</span></div>
+    </div>
+    <div class="card">
+      <h3>❌ Tic-Tac-Toe with Game Trees</h3>
+      <p>C++ implementation using game tree logic as a fun algorithmic refresher.</p>
+      <div class="tags"><span class="tag">C++</span><span class="tag">Algorithms</span></div>
+    </div>
+    <div class="card">
+      <h3>📇 Contact Manager</h3>
+      <p>Built in CMPT 225 to demonstrate object-oriented programming concepts in C++.</p>
+      <div class="tags"><span class="tag">C++</span><span class="tag">OOP</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="interests">
+  <h2><span class="dot"></span>Interests</h2>
+
+  <div class="interest-block">
+    <h3>Football</h3>
+    <p>
+      Football is one of my biggest interests because it combines teamwork, competition, and consistency.
+      It has been a big part of how I stay disciplined, connected, and motivated.
+    </p>
+    <div class="photo-grid">
+      <img src="assets/football-1.jpg" alt="Football photo 1" />
+      <img src="assets/football-2.jpg" alt="Football photo 2" />
+      <img src="assets/football-3.jpg" alt="Football photo 3" />
+      <img src="assets/football-4.jpg" alt="Football photo 4" />
+    </div>
+  </div>
+
+  <div class="interest-block">
+    <h3>Gym</h3>
+    <p>
+      Going to the gym helps me stay consistent, challenge myself physically, and maintain a healthy routine
+      alongside school and projects.
+    </p>
+    <div class="photo-grid">
+      <img src="assets/gym.jpg" alt="Gym photo" />
+    </div>
+  </div>
+
+  <div class="interest-block">
+    <h3>Driving</h3>
+    <p>
+      I enjoy driving because it gives me a sense of freedom and focus, and it's something I find both relaxing
+      and rewarding.
+    </p>
+    <div class="photo-grid">
+      <img src="assets/driving.jpg" alt="Driving photo" />
+    </div>
+  </div>
+
+  <div class="interest-block">
+    <h3>Case Competitions &amp; Networking</h3>
+    <p>
+      I enjoy opportunities that involve presenting ideas, meeting new people, and learning in professional or
+      competitive environments. Case competitions and networking events help me grow my confidence and communication skills.
+    </p>
+    <div class="photo-grid">
+      <img src="assets/case-comp-1.jpg" alt="Case competition or networking photo 1" />
+      <img src="assets/case-comp-2.jpg" alt="Case competition or networking photo 2" />
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <h2><span class="dot"></span>Awards &amp; Certifications</h2>
+  <ul class="awards-list">
+    <li>Fraser International College — Honor Roll Award</li>
+    <li>Fraser International College — Highest Standing Award</li>
+    <li>James Cook University's EcoView Competition — Second Prize</li>
+    <li>Kumon English Program Completion Award</li>
+    <li>DELF/DALF French A2 Certification</li>
+    <li>MIT Robotics Next Door Certificate</li>
+    <li>Protrainings Free Student First Aid (VTQ)</li>
+  </ul>
+</section>
+
+<footer>
+  <p>© 2026 Kritarth Panwar · <a href="mailto:kpanwar.work@gmail.com">kpanwar.work@gmail.com</a></p>
+</footer>
+</body>
+</html>
